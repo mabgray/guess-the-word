@@ -11,18 +11,20 @@ let word = "magnolia";
 let guessedLetters = [];
 let remainingGuesses = 8;
 
+//random selects word from an API
 const getWord = async function () {
   const response = await fetch("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
   const words = await response.text();
   const wordArray = words.split("\n");
   const randomIndex = Math.floor(Math.random() * wordArray.length);
   word = wordArray[randomIndex].trim();
+  //then it calls placeholder function
   placeholder(word);
 };
 
-// Fire off the game
+// this function starts the game
 getWord();
-// Display our symbols as placeholders for the chosen word's letters
+// displays a dot for each letter of word. using a for loop and pushing a dot 
 const placeholder = function (word) {
   const placeholderLetters = [];
   for (const letter of word) {
@@ -31,6 +33,8 @@ const placeholder = function (word) {
   }
   wordInProgress.innerText = placeholderLetters.join("");
 };
+
+//user enters a letter guess and there is an event listener that checks to validate it
 guessLetterButton.addEventListener("click", function (e) {
   e.preventDefault();
   // Empty message paragraph
@@ -65,7 +69,7 @@ const validateInput = function (input) {
 const makeGuess = function (guess) {
   guess = guess.toUpperCase();
   if (guessedLetters.includes(guess)) {
-    message.innerText = "You already guessed that letter, silly. Try again.";
+    message.innerText = "Pay attention. You already guessed that.";
   } else {
     guessedLetters.push(guess);
     console.log(guessedLetters);
