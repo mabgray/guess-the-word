@@ -6,6 +6,7 @@ const remainingGuessesElement = document.querySelector(".remaining");
 const remainingGuessesSpan = document.querySelector(".remaining span");
 const message = document.querySelector(".message");
 const playAgainButton = document.querySelector(".play-again");
+const guessBox = document.querySelector(".guess-box")
 
 let word = "magnolia";
 let guessedLetters = [];
@@ -106,6 +107,7 @@ const updateWordInProgress = function (guessedLetters) {
 };
 const updateGuessesRemaining = function (guess) {
   const upperWord = word.toUpperCase();
+  console.log(remainingGuesses);
   if (!upperWord.includes(guess)) {
     // womp womp - bad guess, lose a chance
     message.innerText = `Sorry, the word has no ${guess}.`;
@@ -134,6 +136,7 @@ const startOver = function () {
   remainingGuessesElement.classList.add("hide");
   guessedLettersElement.classList.add("hide");
   playAgainButton.classList.remove("hide");
+  guessBox.classList.add("hide");
 };
 playAgainButton.addEventListener("click", function () {
   // reset all original values - grab new word
@@ -150,4 +153,5 @@ playAgainButton.addEventListener("click", function () {
   playAgainButton.classList.add("hide");
   remainingGuessesElement.classList.remove("hide");
   guessedLettersElement.classList.remove("hide");
+  guessBox.classList.remove("hide");
 });
